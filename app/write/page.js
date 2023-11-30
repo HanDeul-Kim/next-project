@@ -1,16 +1,19 @@
 import { connectDB } from "@/util/database.js"
-import { MongoClient } from "mongodb"
+import Link from "next/link"
+export default async function Write() {
 
-export default async function Home() {
     let client = await connectDB;
     const db = client.db("next");
+
     let result = await db.collection('post').find().toArray();
+
     console.log(result);
 
-
     return (
-        <>
-            <h1>main 페이지</h1>
-        </>
+        <div className="list-bg">
+            <DataText result={result}></DataText>
+        </div>
     )
+
+
 }
