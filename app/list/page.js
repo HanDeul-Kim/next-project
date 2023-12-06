@@ -1,3 +1,4 @@
+'use client'
 import { connectDB } from "@/util/database.js"
 import Link from "next/link"
 export default async function List() {
@@ -24,7 +25,16 @@ function DataText({result}) {
                             <h4>{result[idx].title}</h4>
                         </Link>
                         <p>{result[idx].content}</p>
-                        <Link href={`/edit/${result[idx]._id}`}>수정</Link>
+                        <div className="btns">
+                            <Link className="edit" href={`/edit/${result[idx]._id}`}>수정</Link>
+                            <Link className="delete"
+                            onClick={ ()=> {
+                                alert('test')
+                            }}
+                            >
+                                게시글 삭제
+                            </Link>
+                        </div>
                     </div>
                 ))
             }

@@ -45,6 +45,7 @@ a {
 .write-wrapper {
     padding: 20px;
 }
+
 .write-wrapper h4 {
     margin-bottom: 10px;
 }
@@ -62,4 +63,50 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.navbar {
+    background: white;
+    padding: 20px;
+    background-color: #000;
+}
+.navbar a {
+    color:#fff;
+}
+.navbar a.logo {
+    text-decoration: none;
+    font-weight: bold;
+}
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.left_nav,
+.right_nav,
+.center_nav {
+    display: flex;
+    gap:20px;
+}
+.navbar a {
+    color:#fff;
+}
+
+
+.btns {
+    display:flex;
+    gap:12px;
+    margin-top: 18px;
+}
+.btns .edit,
+.btns .delete {
+    display:inline-block;
+    background-color: #000;
+    color:#fff;
+    padding: 3px 5px;
+    border-radius: 6px;
+}
+.btns .delete {
+    background-color:gray;
+    color:#fff;
 }
