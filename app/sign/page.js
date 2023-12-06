@@ -16,11 +16,13 @@ export default async function Write() {
             </form> */}
             <div className="input-group">
                 <form action="/api/signup/create" method="POST">
-                    <input type="text" name="id" placeholder="id 입력" />
-                    <input type="password" name="password" placeholder="password 입력" />
+                    <input type="text" name="id" placeholder="아이디" />
+                    <input type="password" name="password" placeholder="비밀번호" />
+                    <input type="password" name="passwordcheck" placeholder="비밀번호 확인" />
                     <button type="submit">가입하기</button>
                 </form>
             </div>
         </div>
     )
 }
+

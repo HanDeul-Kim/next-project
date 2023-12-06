@@ -14,7 +14,6 @@ export default async function List() {
         </div>
     )
 }
-
 function DataText({result}) {
     return (
         <>       
@@ -25,10 +24,11 @@ function DataText({result}) {
                             <h4>{result[idx].title}</h4>
                         </Link>
                         <p>{result[idx].content}</p>
+                        <Link href={`/edit/${result[idx]._id}`}>수정</Link>
                     </div>
                 ))
             }
         </>
-
     )
 }
+
