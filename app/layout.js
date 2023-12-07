@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
             <Link href='/list'>List</Link>
           </div>
           <div className="right_nav">
-            <Link href='javascript:void(0);'>Login</Link>
+            <Link href=''>Login</Link>
             <Link href='/sign'>Sing Up</Link>
           </div>
         </div>
