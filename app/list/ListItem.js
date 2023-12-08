@@ -18,7 +18,6 @@ export default function ListItem({ result }) {
                             <Link className="delete" href={`/api/post/delete`}
                                 onClick={(e) => {
                                     // // 간단하게 axios 사용해도 좋을 듯?
-                                    
                                     // fetch('/api/post/delete', {
                                     //     method: 'DELETE',
                                     //     body: result[idx]._id
@@ -44,10 +43,27 @@ export default function ListItem({ result }) {
                                     // e.target.parentElement.parentElement.classList.add('active');
 
 
-                                    // url 파라미터 방식
-                                    fetch(`/api/post/delete?name=${result[idx]._id}`, {
-                                        method: 'DELETE',
+                                    // query 스트링
+                                    // fetch(`/api/post/delete?currentId=${result[idx]._id}&두번 째 보내고 싶은 데이터 작명=데이터`, {
+                                    //     method: 'DELETE',
+                                    // })
+                                    // fetch(`/api/post/delete?currentId=${result[idx]._id}`, {
+                                    //     method: 'DELETE',
 
+                                    // })
+                                    // .then((r)=> {
+                                    //     if(r.status == 200) {
+                                    //         return r.json();
+                                    //     } else  {
+                                    //         console.log('실패')
+                                    //     }
+                                    // })
+                                    // .then((re)=>{
+                                    //     alert('성공')
+                                    // })
+                                    // .catch(error => console.log(error))
+                                    fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`,{
+                                        method: 'DELETE'
                                     })
                                     .then((r)=> {
                                         if(r.status == 200) {

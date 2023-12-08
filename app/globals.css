@@ -8,7 +8,17 @@ a {
     text-decoration: none;
     color: #000;
 }
-
+.layout-lg {
+    width: 100%;
+    max-width:1920px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
 .list-bg {
     background: rgb(249, 250, 255);
     padding: 10px;
@@ -116,4 +126,28 @@ button {
 .list-item.active {
     opacity: 0;
     visibility: hidden;
+}
+
+
+
+.list-item a {
+    width:auto;
+}
+.list-item h4 {
+    overflow: hidden;
+    width: 100%;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    display: -webkit-box !important;
+}
+.list-item p {
+    overflow: hidden;
+    width: 100%;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    display: -webkit-box !important;
 }
