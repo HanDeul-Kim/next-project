@@ -7,7 +7,6 @@ export default async function Write() {
 
     let result = await db.collection('post').find().toArray();
 
-    console.log(result);
 
     return (
         <div class="write-wrapper">

@@ -1,6 +1,9 @@
 import { connectDB } from "@/util/database.js"
 import Link from "next/link"
 import ListItem from './ListItem.js'
+
+export const dynamic = 'force-dynamic'
+
 export default async function List() {
 
     let client = await connectDB;
@@ -10,7 +13,6 @@ export default async function List() {
         a._id = a._id.toString()
         return a
     })
-
 
     return (
         <div className="list-bg">

@@ -103,7 +103,6 @@ button {
     color:#fff;
 }
 
-
 .btns {
     display:flex;
     gap:12px;
@@ -121,21 +120,10 @@ button {
     background-color:gray;
     color:#fff;
 }
-
-
-.list-item.active {
-    opacity: 0;
-    visibility: hidden;
-}
-
-
-
-.list-item a {
-    width:auto;
-}
 .list-item h4 {
     overflow: hidden;
     width: 100%;
+    max-width:800px;
     -webkit-line-clamp: 1;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -145,9 +133,45 @@ button {
 .list-item p {
     overflow: hidden;
     width: 100%;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     word-break: break-word;
     display: -webkit-box !important;
+}
+
+.list-item.active {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10%);
+}
+.navbar button {
+    border:none;
+    background: tomato;
+    color:#fff;
+    font-size: 16px;
+    transition: 0.2s;
+}
+.navbar button:hover {
+    background: #fff;
+    color:#000;
+}
+.user-info {
+    display:flex;
+    align-items: center;
+    gap:12px;
+}
+.welcome {
+    display:flex;
+    align-items: center;
+    color:#ccc;
+}
+.welcome b {
+    color:#fff;
+    font-weight: 700;
+}
+.profile-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }

@@ -1,9 +1,9 @@
 'use client'
 // import { connectDB } from "@/util/database.js"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function ListItem({ result }) {
-
     return (
         <>
             {
@@ -15,7 +15,7 @@ export default function ListItem({ result }) {
                         <p>{result[idx].content}</p>
                         <div className="btns">
                             <Link className="edit" href={`/edit/${result[idx]._id}`}>수정</Link>
-                            <Link className="delete" href={`/api/post/delete`}
+                            <Link className="delete" href=''
                                 onClick={(e) => {
                                     // // 간단하게 axios 사용해도 좋을 듯?
                                     // fetch('/api/post/delete', {
@@ -29,13 +29,13 @@ export default function ListItem({ result }) {
                                     //             // 서버가 에러코드 전송시 실행할 코드
                                     //         }
                                     //     })
-                                    //     .then((result) => {
-                                    //         // 성공시 실행할 코드
-                                    //         document.querySelectorAll('.list-item')[idx].classList.add('active')
-                                    //         setTimeout( () => {
-                                    //             e.target.parentElement.parentElement.style.display = 'none'
-                                    //         }, 500)
-                                    //     })
+                                        // .then((result) => {
+                                        //     // 성공시 실행할 코드
+                                        //     document.querySelectorAll('.list-item')[idx].classList.add('active')
+                                        //     setTimeout( () => {
+                                        //         e.target.parentElement.parentElement.style.display = 'none'
+                                        //     }, 500)
+                                        // })
                                     //     .catch((error) => {
                                     //         // 인터넷 문제로 실패시 실행 할 코드
                                     //         console.log(error);
@@ -73,7 +73,10 @@ export default function ListItem({ result }) {
                                         }
                                     })
                                     .then((re)=>{
-                                        alert('성공')
+                                        e.target.parentElement.parentElement.classList.add('active')
+                                        setTimeout( () => {
+                                            e.target.parentElement.parentElement.style.display = 'none'
+                                        },500)
                                     })
                                     .catch(error => console.log(error))
                                 }}>

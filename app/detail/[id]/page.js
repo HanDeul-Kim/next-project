@@ -7,7 +7,6 @@ export default async function Detail(props) {
     let client = await connectDB;
     const db = client.db("next");
     let result = await db.collection('post').findOne({_id: new ObjectId(props.params.id)})
-    console.log(props);
 
     return (
         <div className="layout-lg">
