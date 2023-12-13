@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions)
-  console.log(session);
+  // console.log(session);
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -27,8 +27,16 @@ export default async function RootLayout({ children }) {
             <Link href='/list'>List</Link>
           </div>
           <div className="right_nav">
-            {/* <LoginBtn></LoginBtn> */}
-            {session === null ? <LoginBtn></LoginBtn> : <LogoutBtn />}
+            {
+              session === null ?
+                <LoginBtn />
+                :
+                <div className="user-info">
+                  <img src={session.user.image} className="profile-img" alt="" />
+                  <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
+                  <LogoutBtn />
+                </div>
+            }
           </div>
         </div>
         {children}

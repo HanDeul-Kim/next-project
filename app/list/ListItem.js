@@ -62,7 +62,7 @@ export default function ListItem({ result }) {
                                     //     alert('성공')
                                     // })
                                     // .catch(error => console.log(error))
-                                    fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`,{
+                                    fetch(`/api/abc/${JSON.stringify(result[idx])}`,{
                                         method: 'DELETE'
                                     })
                                     .then((r)=> {
