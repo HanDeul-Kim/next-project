@@ -18,21 +18,23 @@ export default async function Edit(props) {
     // )
     
     return (
-        <div class="write-wrapper">
-            <h4>글 수정</h4>
-            {/* <form action="/api/test" method="GET">
-                <button type="submit">버튼</button>
-            </form> */}
-            {/* <form action="/api/date" method="GET">dfsdasd
-                <button type="submit">버튼</button>
-            </form> */}
-            <div className="input-group">
-                <form action="/api/post/edit" method="POST">
-                    <input type="text" name="title" defaultValue={result.title} />
-                    <input type="text" name="content" defaultValue={result.content} />
-                    <input style={{display: 'none'}} type="text" name="id" defaultValue={result._id}></input>
-                    <button type="submit">수정하기</button>
-                </form>
+        <div className="layout-lg">
+            <div class="write-wrapper">
+                <h4>글 수정</h4>
+                {/* <form action="/api/test" method="GET">
+                    <button type="submit">버튼</button>
+                </form> */}
+                {/* <form action="/api/date" method="GET">dfsdasd
+                    <button type="submit">버튼</button>
+                </form> */}
+                <div className="input-group">
+                    <form action="/api/post/edit" method="POST">
+                        <input type="text" name="title" defaultValue={result.title} />
+                        <input type="text" name="content" defaultValue={result.content} />
+                        <input style={{display: 'none'}} type="text" name="id" defaultValue={result._id}></input>
+                        <button type="submit">수정하기</button>
+                    </form>
+                </div>
             </div>
         </div>
     )

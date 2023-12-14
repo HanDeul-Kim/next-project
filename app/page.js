@@ -19,9 +19,9 @@ export default async function Home() {
       
 
     return (
-        <>
-            {/* <h1>main 페이지</h1> */}
-        </>
+        <div className="layout-lg">
+            <h1>main 페이지</h1>
+        </div>
     )
 }
 

@@ -69,7 +69,7 @@ export default function ListItem({ result }) {
                                         if(r.status == 200) {
                                             return r.json();
                                         } else  {
-                                            console.log('실패')
+                                            alert('로그인 먼저 해주세요!')
                                         }
                                     })
                                     .then((re)=>{
@@ -82,6 +82,7 @@ export default function ListItem({ result }) {
                                 }}>
                                 삭제하기
                             </Link>
+                            
                         </div>
                     </div>
                 ))
