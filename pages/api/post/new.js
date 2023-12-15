@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     
     let session = await getServerSession(req, res, authOptions)
     // console.log(props)
+    // console.log(session)
     // let result = await db.collection('post').find().toArray();
     // let result = await db.collection('post').findOne({_id: new ObjectId(props.params.id)})
 

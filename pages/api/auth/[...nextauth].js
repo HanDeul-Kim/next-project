@@ -19,19 +19,19 @@ export const authOptions = {
     CredentialsProvider({
 
       // 1. 로그인 페이지 & 폼 자동생성해주는 코드
-      name: "credentials",
+      name: "",
       credentials: {
         // 로그인 할 때 입력 받을 input 추가
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: { label: "아이디", type: "text" },
+        password: { label: "비밀번호", type: "password" },
       },
 
       //2. 로그인 요청시 실행되는코드
       //직접 DB에서 아이디,비번 비교하고 
       //아이디,비번 맞으면 return 결과, 틀리면 return null
       async authorize(credentials) {
-        let db = (await connectDB).db('forum');
-        let user = await db.collection('user_cred').findOne({ email: credentials.email })
+        let db = (await connectDB).db('next');
+        let user = await db.collection('user_cred').findOne({ name: credentials.email })
         if (!user) {
           console.log('해당 이메일은 없음');
           return null
@@ -74,7 +74,7 @@ export const authOptions = {
   },
   // jwt 사용자 지정 로그인 방식 끝
 
-  secret: 'dlffos12',
+  secret: 'qwer1234',
   adapter: MongoDBAdapter(connectDB)
 };
 export default NextAuth(authOptions); 

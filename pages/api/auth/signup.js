@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         req.body.password = hash;
         req.body.passwordcheck = hash;
 
-        console.log(req.body)
+        // console.log(req.body)
         let db = (await connectDB).db('next');
         await db.collection('user_cred').insertOne(req.body);
 
