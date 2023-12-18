@@ -69,7 +69,7 @@ export default function ListItem({ result }) {
                                         if(r.status == 200) {
                                             return r.json();
                                         } else  {
-                                            alert('로그인 먼저 해주세요!')
+                                            alert('로그인을 먼저 해주세요!')
                                         }
                                     })
                                     .then((re)=>{

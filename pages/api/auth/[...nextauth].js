@@ -2,15 +2,24 @@ import { connectDB } from "@/util/database";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import NaverProvider from "next-auth/providers/naver";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt';
 
 export const authOptions = {
   providers: [
+    // naver login
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID,
+      clientSecret: process.env.NAVER_CLIENT_SECRET,
+      profileUrl: 'https://openapi.naver.com/v1/nid/me',
+
+
+    }),
     // github login
     GithubProvider({
-      clientId: '9aa4aba2f24457673e8a',
-      clientSecret: '7af4346d8662e308caadd9e481cf1305e0c467d9',
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
 
     // jwt 사용자 지정 로그인 방식
@@ -22,8 +31,8 @@ export const authOptions = {
       name: "",
       credentials: {
         // 로그인 할 때 입력 받을 input 추가
-        email: { label: "아이디", type: "text" },
-        password: { label: "비밀번호", type: "password" },
+        email: { label: "아이디", type: "text", placeholder: '아이디' },
+        password: { label: "비밀번호", type: "password", placeholder: '비밀번호' },
       },
 
       //2. 로그인 요청시 실행되는코드
@@ -63,13 +72,23 @@ export const authOptions = {
         token.user.name = user.name
         token.user.email = user.email
       }
+      console.log(user);
+      console.log(token)
       return token
     },
 
     // 5. 유저 세션이 조회될 때 마다 실행 되는 코드
     session: async ({ session, token }) => {
       session.user = token.user;
+      console.log(session)
+      console.log(token)
       return session;
+    },
+
+    signIn: async (user, account, profile) => {
+      console.log('Naver User Info:', profile);
+      console.log(user);
+      return true;
     },
   },
   // jwt 사용자 지정 로그인 방식 끝
