@@ -5,8 +5,8 @@ import LoginBtn from './LoginBtn'
 import LogoutBtn from './LogoutBtn'
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import Check from './write/Check'
 const inter = Inter({ subsets: ['latin'] })
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -44,3 +44,4 @@ export default async function RootLayout({ children }) {
     </html>
   )
 }
+
