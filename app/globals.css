@@ -8,17 +8,20 @@ a {
     text-decoration: none;
     color: #000;
 }
+
 .layout-lg {
     width: 100%;
-    max-width:1920px;
+    max-width: 1920px;
     margin: 0 auto;
     padding: 15px 20px;
 }
+
 .details {
     display: flex;
     flex-direction: column;
-    gap:12px;
+    gap: 12px;
 }
+
 .list-bg {
     background: rgb(249, 250, 255);
     padding: 10px;
@@ -81,55 +84,64 @@ button {
     padding: 20px;
     background-color: #000;
 }
+
 .navbar a {
-    color:#fff;
+    color: #fff;
 }
+
 .navbar a.logo {
     text-decoration: none;
     font-weight: bold;
 }
+
 .navbar {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .left_nav,
 .right_nav,
 .center_nav {
     display: flex;
-    gap:20px;
+    gap: 20px;
 }
+
 .navbar a {
-    color:#fff;
+    color: #fff;
 }
 
 .btns {
-    display:flex;
-    gap:12px;
+    display: flex;
+    gap: 12px;
     margin-top: 18px;
 }
+
 .btns .edit,
 .btns .delete {
-    display:inline-block;
+    display: inline-block;
     background-color: #000;
-    color:#fff;
+    color: #fff;
     padding: 3px 5px;
     border-radius: 6px;
 }
+
 .btns .delete {
-    background-color:gray;
-    color:#fff;
+    background-color: gray;
+    color: #fff;
 }
+
 .list-item h4 {
     overflow: hidden;
     width: 100%;
-    max-width:800px;
+    max-width: 800px;
     -webkit-line-clamp: 1;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     word-break: break-word;
     display: -webkit-box !important;
 }
+
 .list-item p {
     overflow: hidden;
     width: 100%;
@@ -145,33 +157,70 @@ button {
     visibility: hidden;
     transform: translateX(-10%);
 }
+
 .navbar button {
-    border:none;
+    border: none;
     background: tomato;
-    color:#fff;
+    color: #fff;
     font-size: 16px;
     transition: 0.2s;
 }
+
 .navbar button:hover {
     background: #fff;
-    color:#000;
+    color: #000;
 }
+
 .user-info {
-    display:flex;
+    display: flex;
     align-items: center;
-    gap:12px;
+    gap: 12px;
 }
+
 .welcome {
-    display:flex;
+    display: flex;
     align-items: center;
-    color:#ccc;
+    color: #ccc;
 }
+
 .welcome b {
-    color:#fff;
+    color: #fff;
     font-weight: 700;
 }
+
 .profile-img {
     width: 32px;
     height: 32px;
+    border-radius: 50%;
+}
+
+
+
+/* profile */
+.profile-img {cursor: pointer;}
+.profile-gallery {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.profile-gallery.active {
+    opacity: 1;
+    visibility: visible;
+}
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.profile img {
+    height: 50%;
     border-radius: 50%;
 }

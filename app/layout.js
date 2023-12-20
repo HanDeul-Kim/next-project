@@ -5,6 +5,8 @@ import LoginBtn from './LoginBtn'
 import LogoutBtn from './LogoutBtn'
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import Profile from './ProfileGallery'
+import LoginInfo from './LoginInfo'
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -15,9 +17,11 @@ export const metadata = {
  
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions)
+  console.log(session);
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Profile />
         <div className="navbar">
           <div className="left_nav">
             <Link href='/' className="logo">forum</Link>
@@ -31,13 +35,15 @@ export default async function RootLayout({ children }) {
               session === null ?
                 <LoginBtn />
                 :
-                <div className="user-info">
-                  <img src={session.user.image} className="profile-img" alt="" />
-                  <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
-                  <LogoutBtn />
-                </div>
+                // <div className="user-info">
+                //   <img src={session.user.img} className="profile-img" alt="" />
+                //   <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
+                //   <LogoutBtn />
+                // </div>
+                <LoginInfo />
             }
           </div>
+          
         </div>
         {children}
       </body>

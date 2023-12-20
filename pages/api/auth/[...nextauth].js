@@ -81,7 +81,10 @@ export const authOptions = {
 
     // 5. 유저 세션이 조회될 때 마다 실행 되는 코드
     session: async ({ session, token }) => {
-      session.user = token.user;
+      // session.user = token.user;
+      
+      session.user.mail = token.sub;
+      session.user.img = token.picture;
       return session;
     },
 
