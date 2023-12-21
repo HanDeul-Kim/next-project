@@ -21,7 +21,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Profile />
+        {
+          session === null ?
+          false
+          :
+          <Profile session={session}/>
+        }
         <div className="navbar">
           <div className="left_nav">
             <Link href='/' className="logo">forum</Link>
@@ -35,15 +40,9 @@ export default async function RootLayout({ children }) {
               session === null ?
                 <LoginBtn />
                 :
-                // <div className="user-info">
-                //   <img src={session.user.img} className="profile-img" alt="" />
-                //   <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
-                //   <LogoutBtn />
-                // </div>
-                <LoginInfo />
+                <LoginInfo session = {session}/>
             }
           </div>
-          
         </div>
         {children}
       </body>

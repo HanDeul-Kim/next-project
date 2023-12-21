@@ -82,16 +82,20 @@ export const authOptions = {
     // 5. 유저 세션이 조회될 때 마다 실행 되는 코드
     session: async ({ session, token }) => {
       // session.user = token.user;
-      
+
       session.user.mail = token.sub;
       session.user.img = token.picture;
       return session;
     },
 
   },
+  // 로그인 custom page
+  pages: {
+    signIn: '/signin'
+  },
   // jwt 사용자 지정 로그인 방식 끝
 
   secret: process.env.NORMAL_SECRET,
   adapter: MongoDBAdapter(connectDB)
 };
-export default NextAuth(authOptions); 
+export default NextAuth(authOptions);

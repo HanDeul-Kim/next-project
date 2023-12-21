@@ -1,14 +1,29 @@
-// 'use client'
-// use client 사용하면 이렇게 된다고??
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-// import LogOutBtn from './LogoutBtn';
-export default async function LoginInfo() {
-    let session = await getServerSession(authOptions);
-    return (
-        <div className="user-info">
-            <img src={session.user.img} className="profile-img" alt="" />
-            <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
-        </div>
-    )
+'use client'
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import LogoutBtn from './LogoutBtn'
+// const handleProfile = () => {
+//     alert('handle')
+// }
+export default async function LoginInfo({session}) {
+    // let session = await getServerSession(authOptions);
+    {
+        // return (
+        //     <div className="user-info">
+        //         <img onClick={ () => {alert('test')}} src={session.user.img} className="profile-img" alt="" />
+        //         <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
+        //         <LogoutBtn />
+        //     </div>
+        // )
+        return (
+            <div className="user-info">
+                <img onClick={() => {
+                    document.querySelector('.profile-gallery').classList.add('active') }
+                }
+                src={session.user.img} className="profile-img" alt="" />
+                <div className="welcome"><b>{session.user.name}</b>님 환영합니다!</div>
+                <LogoutBtn />
+            </div>
+        )
+    }
 }

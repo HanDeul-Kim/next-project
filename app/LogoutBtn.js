@@ -6,7 +6,6 @@ export default function LogoutBtn() {
         <>
             <div className="user-info">
                 <button onClick={ () => { signOut() }}>로그아웃</button>   
-                <var></var>
             </div>
         </>
     )
