@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Orbit&display=swap');
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+body, div, p, a, span, h1, h2, h3, button{
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 a {
@@ -10,6 +14,8 @@ a {
 }
 
 .layout-lg {
+    display:flex;
+    justify-content: center;
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
@@ -248,4 +254,59 @@ button {
 }
 .gallery-close span:nth-child(2) {
     transform: rotate(-45deg);
+}
+
+.layout-inner {
+    width: 100%;
+    max-width:400px;
+    display:flex;
+    justify-content: center;
+}
+.login-wrapper {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    border:2px solid #000;
+    margin-top: 40px;
+}
+.login-wrapper h1 {
+    font-size:28px;
+    margin-bottom: 20%;
+    line-height: 1.35;
+    font-family: 'Orbit', sans-serif;
+    font-weight:bold;
+}
+.login-wrap {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    gap:10px;
+}
+.login-wrap button {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:16px;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+}
+.login-wrap button img {
+    width: 26px;
+    height: 26px;
+}
+.login-wrap button span {
+    font-size: 14px;
+}
+.kakao {
+    background-color: #FAE100;
+}
+.login-wrap .kakao img {
+    width: 22px;
+    height: 22px;
+}
+.naver {
+    background-color: #1EC800;
+    color:#fff;
 }
