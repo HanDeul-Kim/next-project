@@ -8,7 +8,15 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Profile from './ProfileGallery'
 import LoginInfo from './LoginInfo'
 const inter = Inter({ subsets: ['latin'] })
+import Layout from "components/layouts/layout";
 
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
+}
 
 export const metadata = {
   title: 'Create Next App',

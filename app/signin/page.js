@@ -50,3 +50,19 @@ export default function Login() {
         </div>
     )
 }
+import Layout from "components/layouts/layout";
+
+export default function App({ Component, pageProps }: AppProps) {
+  switch (pageProps.layout) {
+    case "login": {
+      return <Component {...pageProps} />;
+    }
+    default: {
+      return (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      );
+    }
+  }
+}
