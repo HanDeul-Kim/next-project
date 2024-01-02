@@ -267,7 +267,6 @@ button {
     padding: 20px;
     border-radius: 8px;
     border:2px solid #000;
-    margin-top: 40px;
 }
 .login-wrapper h1 {
     font-size:28px;
@@ -309,4 +308,9 @@ button {
 .naver {
     background-color: #1EC800;
     color:#fff;
+}
+.login-full {
+    height: 100vh;
+    display:flex;
+    align-items: center;
 }

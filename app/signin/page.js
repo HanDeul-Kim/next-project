@@ -1,6 +1,6 @@
 'use client'
 import React, { signIn } from "next-auth/react"
-// import { useRef } from "react"
+
 export default function Login() {
 
     // const emailRef = useRef(null)
@@ -20,11 +20,10 @@ export default function Login() {
     // const handleSignIn = async (provider) => {
     //     await signIn(provider);
     // };
-
     const handleSignIn = async (provider) => {
         await signIn(provider, { callbackUrl: '/' })
     };
-
+    
     return (
         <div className="layout-lg">
             <div className="layout-inner">
@@ -49,20 +48,4 @@ export default function Login() {
 
         </div>
     )
-}
-import Layout from "components/layouts/layout";
-
-export default function App({ Component, pageProps }: AppProps) {
-  switch (pageProps.layout) {
-    case "login": {
-      return <Component {...pageProps} />;
-    }
-    default: {
-      return (
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      );
-    }
-  }
 }
