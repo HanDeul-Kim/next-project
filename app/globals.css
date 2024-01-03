@@ -257,10 +257,12 @@ button {
 }
 
 .layout-inner {
+    position: relative;
     width: 100%;
     max-width:400px;
     display:flex;
     justify-content: center;
+    background:rgba(0, 0, 0, 0.8);
 }
 .login-wrapper {
     width: 100%;
@@ -274,6 +276,7 @@ button {
     line-height: 1.35;
     font-family: 'Orbit', sans-serif;
     font-weight:bold;
+    color:#fff;
 }
 .login-wrap {
     display:flex;
@@ -310,7 +313,31 @@ button {
     color:#fff;
 }
 .login-full {
+    position: relative;
     height: 100vh;
     display:flex;
     align-items: center;
+    /* background-image: url('/ogsusu2.png');
+    background-size: 170px 170px; */
+}
+.page_back {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -40px;
+    left: 0;
+}
+.page_back img {
+    width: 25px;
+    height: 25px;
+}
+.page_back span {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+.logo img {
+    width: 36px;
+    height: 36px;
 }

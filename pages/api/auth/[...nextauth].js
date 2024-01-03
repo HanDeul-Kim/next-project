@@ -65,6 +65,7 @@ export const authOptions = {
   //3. jwt 만료일설정
   session: {
     strategy: 'jwt',
+    jwt:true,
     maxAge: 30 * 24 * 60 * 60 // 30일
   },
   // 4. jwt 만들 때 실행되는 코드
@@ -76,6 +77,7 @@ export const authOptions = {
         token.user.name = user.name
         token.user.email = user.email
       }
+      console.log(token);
       return token
     },
 

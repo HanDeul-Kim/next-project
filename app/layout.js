@@ -8,7 +8,8 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Profile from './ProfileGallery'
 import LoginInfo from './LoginInfo'
 import { headers } from 'next/headers';
-import { signIn, signOut} from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
+import Nav from './nav'
 const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Create Next App',
@@ -17,17 +18,17 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions)
-  console.log(session);
+  // console.log(session);
   // next.js 미들웨어
   const headersList = headers();
   const headerPathname = headersList.get('x-pathname') || "";
   return (
     <html lang="en">
       <body className=
-      {
-        // inter.className
-        headerPathname === '/signin' ? `${inter.className} login-full` : null
-      }>
+        {
+          // inter.className
+          headerPathname === '/signin' ? `${inter.className} login-full` : null
+        }>
         {
           session === null ?
             false
@@ -38,25 +39,8 @@ export default async function RootLayout({ children }) {
           headerPathname === '/signin' ?
             null
             :
-            <div className="navbar">
-              <div className="left_nav">
-                <Link href='/' className="logo">forum</Link>
-              </div>
-              <div className="center_nav">
-                <Link href='/write'>Write</Link>
-                <Link href='/list'>List</Link>
-              </div>
-              <div className="right_nav">
-                {
-                  session === null ?
-                    <LoginBtn />
-                    :
-                    <LoginInfo session={session} />
-                }
-              </div>
-            </div>
+            <Nav></Nav>
         }
-
         {children}
       </body>
     </html>

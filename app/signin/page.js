@@ -1,6 +1,7 @@
 'use client'
 import React, { signIn } from "next-auth/react"
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 export default function Login() {
 
     // const emailRef = useRef(null)
@@ -23,7 +24,7 @@ export default function Login() {
     const handleSignIn = async (provider) => {
         await signIn(provider, { callbackUrl: '/' })
     };
-    
+    const router = useRouter();
     return (
         <div className="layout-lg">
             <div className="layout-inner">
@@ -44,6 +45,10 @@ export default function Login() {
                         </button>
                     </div>
                 </div>
+                <a className="page_back" href="/">
+                    <img src="./arrow_back.png" alt="" />
+                    <span>Back</span>
+                </a>
             </div>
 
         </div>
