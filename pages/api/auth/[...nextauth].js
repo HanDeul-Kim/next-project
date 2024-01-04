@@ -77,7 +77,6 @@ export const authOptions = {
         token.user.name = user.name
         token.user.email = user.email
       }
-      console.log(token);
       return token
     },
 
@@ -85,7 +84,7 @@ export const authOptions = {
     session: async ({ session, token }) => {
       // session.user = token.user;
 
-      session.user.mail = token.sub;
+      session.user.id = token.sub;
       session.user.img = token.picture;
       return session;
     },

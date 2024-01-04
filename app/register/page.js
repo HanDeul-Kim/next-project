@@ -1,6 +1,6 @@
 export default function Register() {
     return (
-        <div class="write-wrapper">
+        <div className="write-wrapper">
             <h4>회원가입</h4>
             {/* <form action="/api/test" method="GET">
                 <button type="submit">버튼</button>
