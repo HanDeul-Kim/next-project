@@ -2,10 +2,11 @@
 import React, { signIn } from "next-auth/react"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 export default function Login() {
 
-    // const emailRef = useRef(null)
-    // const passwordRef = useRef(null)
+    const emailRef = useRef(null)
+    const passwordRef = useRef(null)
 
 
     // const handLeSubmit = async () => {
@@ -21,9 +22,22 @@ export default function Login() {
     // const handleSignIn = async (provider) => {
     //     await signIn(provider);
     // };
+
+    // 소셜 로그인 
     const handleSignIn = async (provider) => {
         await signIn(provider, { callbackUrl: '/' })
     };
+    // 사용자 정의 로그인 활성화
+    // const handleSubmit = async () => {
+    //     // console.log(emailRef.current)
+    //     // console.log(passwordRef.current)
+    //     const result = await signIn("credentials", {
+    //         username: emailRef.current,
+    //         password: passwordRef.current,
+    //         redirect: true,
+    //         callbackUrl: "/",
+    //     });
+    // }
     const router = useRouter();
     return (
         <div className="layout-lg">
@@ -50,7 +64,63 @@ export default function Login() {
                     <span>Back</span>
                 </a>
             </div>
+            {/* 사용자 정의 로그인 활성화*/}
+            {/* <main className="">
+                <h1 className="">Login</h1>
+                <div>
+                    <div>
+                        <label
+                            htmlFor="email"
+                            className=""
+                        >
+                            Email
+                        </label>
 
+                        <div className="">
+                            <input
+                                ref={emailRef}
+                                onChange={e => {
+                                    emailRef.current = e.target.value
+                                }}
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                autoFocus={true}
+                                className=""
+                            />
+                        </div>
+                    </div>
+
+                    <div className="">
+                        <label
+                            htmlFor="password"
+                            className=""
+                        >
+                            Password
+                        </label>
+                        <div className="mt-1">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                ref={passwordRef}
+                                onChange={e => (passwordRef.current = e.target.value)}
+                                className=""
+                            />
+                        </div>
+                    </div>
+
+                    <div className="mt-6">
+                        <button
+                            onClick={handleSubmit}
+                            className=""
+                        >
+                            Log In
+                        </button>
+                    </div>
+                </div>
+            </main> */}
         </div>
     )
 }

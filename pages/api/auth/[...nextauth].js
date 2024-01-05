@@ -32,7 +32,7 @@ export const authOptions = {
     CredentialsProvider({
 
       // 1. 로그인 페이지 & 폼 자동생성해주는 코드
-      name: "",
+      name: "credentials",
       credentials: {
         // 로그인 할 때 입력 받을 input 추가
         email: { label: "아이디", type: "text", placeholder: '아이디' },

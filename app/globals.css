@@ -317,7 +317,8 @@ button {
     height: 100vh;
     display:flex;
     align-items: center;
-    /* background-image: url('/ogsusu2.png');
+    /* background-color: #000;
+    background-image: url('/ogsusu2.png');
     background-size: 170px 170px; */
 }
 .page_back {
