@@ -9,13 +9,14 @@ export default async function Edit(props) {
     const db = client.db("next");
 
     const result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) });
-
     let session = await getServerSession(authOptions)
-    // console.log(sssion);
-
+    
+    // const roleBase = await db.collection('users').find().toArray();
+    
 
     if (session) {
-        if (result.id === session.user.id) {
+        const roleBase = await db.collection('users').findOne({_id: new ObjectId(session.user.id)})
+        if (result.id === session.user.id || roleBase.role === "master") {
             return (
                 <div className="layout-lg">
                     <div className="write-wrapper">
@@ -27,9 +28,6 @@ export default async function Edit(props) {
                             <button type="submit">버튼</button>
                         </form> */}
                         <div className="input-group">
-                            <input type="text">
-
-                            </input>
                             <form action="/api/post/edit" method="POST">
                                 <input type="text" name="title" defaultValue={String(result.title)} />
                                 <input type="text" name="content" defaultValue={String(result.content)} />

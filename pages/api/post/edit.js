@@ -1,9 +1,15 @@
 import { connectDB } from "@/util/database.js"
 import { ObjectId } from "mongodb";
+import { getServerSession } from 'next-auth'
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 export default async function handler(req, res) {
     let client = await connectDB;
     const db = client.db("next");
 
+
+    // const result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) });
+    // let session = await getServerSession(authOptions)
+    // console.log(session);
     let changed = {
         title: req.body.title,
         content:req.body.content
@@ -13,6 +19,7 @@ export default async function handler(req, res) {
     //     {_id: },
     //     {$set : req.body }
     // )
+    
     
     // if (req.method === "POST") {
 

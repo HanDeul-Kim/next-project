@@ -1,13 +1,18 @@
 'use client'
 import { useRouter } from "next/navigation"
 import { signIn, signOut } from 'next-auth/react'
+import { useEffect } from "react";
+export default async function Fail({ type }) {
 
-export default function Fail({ type }) {
+
+
     const router = useRouter();
-    
+
     if (type === "infoError") {
-        alert('글 작성자만 수정 가능합니다! 😅')
-        router.push('/list');
+        useEffect(() => {
+            alert('글 작성자만 수정 가능합니다! 😅')
+            router.push('/list');
+        }, [])
     } else if (type === "loginError") {
         signIn();
     }

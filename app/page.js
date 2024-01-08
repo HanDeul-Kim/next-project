@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export default async function Home() {
     let session = await getServerSession(authOptions)
-    console.log(session)
+    // console.log(session)
     // let client = await connectDB;
     // const db = client.db("next");
     // let result = await db.collection('post').find().toArray();

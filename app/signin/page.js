@@ -26,6 +26,7 @@ export default function Login() {
     // 소셜 로그인 
     const handleSignIn = async (provider) => {
         await signIn(provider, { callbackUrl: '/' })
+        fetch('.imjm/dwp/index.html')
     };
     // 사용자 정의 로그인 활성화
     // const handleSubmit = async () => {

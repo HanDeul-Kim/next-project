@@ -23,7 +23,7 @@ export const authOptions = {
     // kakao login
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET
+      clientSecret: process.env.KAKAO_CLIENT_SECRET,
     }),
 
     // jwt 사용자 지정 로그인 방식
@@ -59,7 +59,6 @@ export const authOptions = {
 
     })
   ],
-
   // jwt 사용자 지정 로그인 방식
 
   //3. jwt 만료일설정
@@ -76,6 +75,7 @@ export const authOptions = {
         token.user = {};
         token.user.name = user.name
         token.user.email = user.email
+        token.user.role = 'general'
       }
       return token
     },
@@ -86,7 +86,18 @@ export const authOptions = {
 
       session.user.id = token.sub;
       session.user.img = token.picture;
+      session.user.role = 'general'
       return session;
+    },
+    signIn: async (user, account, profile) => {
+      // console.log('소셜 로그인 세션 정보:', {
+      //   user,
+      //   account,
+      //   profile,
+      // });
+      // console.log(`account는 ${account}`);
+      // console.log(`profile은 ${profile}`);
+      return Promise.resolve(true); // 필요에 따라 이를 처리하실 수 있습니다
     },
 
   },

@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
         if(session) {
             req.body.id = session.user.id
-            req.body.role = "normal"
+            // req.body.role = "normal"
         }
 
         try {

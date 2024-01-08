@@ -14,7 +14,9 @@ export default function ListItem({ result }) {
                         </Link>
                         <p>{result[idx].content}</p>
                         <div className="btns">
-                            <Link className="edit" href={`/edit/${result[idx]._id}`}>수정</Link>
+                            <Link className="edit" href={`/edit/${result[idx]._id}`}>
+                                수정
+                            </Link>
                             <Link className="delete" href=''
                                 onClick={(e) => {
                                     // // 간단하게 axios 사용해도 좋을 듯?
