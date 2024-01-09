@@ -4,6 +4,9 @@ import Link from "next/link"
 import { useState } from "react"
 
 export default function ListItem({ result }) {
+    // console.log(JSON.stringify(result[idx]._id))
+    // console.log(result[idx])
+    // console.log(JSON.stringify(result))
     return (
         <>
             {
@@ -64,14 +67,15 @@ export default function ListItem({ result }) {
                                     //     alert('성공')
                                     // })
                                     // .catch(error => console.log(error))
-                                    fetch(`/api/abc/${JSON.stringify(result[idx])}`,{
+                                    
+                                    fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`,{
                                         method: 'DELETE'
                                     })
                                     .then((r)=> {
                                         if(r.status == 200) {
                                             return r.json();
                                         } else  {
-                                            alert('로그인을 먼저 해주세요!')
+                                            alert('에러!')
                                         }
                                     })
                                     .then((re)=>{

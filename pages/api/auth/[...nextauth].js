@@ -88,17 +88,17 @@ export const authOptions = {
       session.user.img = token.picture;
       session.user.role = 'general'
       return session;
+            
     },
-    signIn: async (user, account, profile) => {
-      // console.log('소셜 로그인 세션 정보:', {
-      //   user,
-      //   account,
-      //   profile,
-      // });
-      // console.log(`account는 ${account}`);
-      // console.log(`profile은 ${profile}`);
-      return Promise.resolve(true); // 필요에 따라 이를 처리하실 수 있습니다
-    },
+    // DB accounts, users 조회 
+    // signIn: async (user, account, profile) => {
+    //   console.log('소셜 로그인 세션 정보:', {
+    //     user,
+    //     account,
+    //     profile,
+    //   });
+    //   return Promise.resolve(true); // 필요에 따라 이를 처리하실 수 있습니다
+    // },
 
   },
   // 로그인 custom page
