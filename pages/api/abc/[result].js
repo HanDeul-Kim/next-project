@@ -2,7 +2,7 @@ import { connectDB } from "@/util/database.js"
 import { ObjectId } from "mongodb";
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-
+import Fail from '../../../app/Error'
 export default async function handler(req, res) {
 
     let session = await getServerSession(req, res, authOptions)
@@ -10,48 +10,47 @@ export default async function handler(req, res) {
     let client = await connectDB;
     const db = client.db("next");
 
-    // const deleteTarget = db.collection('post').findOne({_id: new ObjectId(JSON.parse(req.query.result))});
-    const deleteTarget = await db.collection('post').findOne({ _id: new ObjectId(JSON.parse(req.query.result)._id) })
-    // console.log(deleteTarget);
+    const deleteTarget = await db.collection('post').findOne({ _id: new ObjectId(JSON.parse(req.query.result)) })
 
-    console.log(req.query.result)   // 659ca0554c07c1ffc190aacf
-    console.log(session.user.id)    // 65962e35335561799ee2d911
-    
-    const babo = await db.collection('post').findOne({});
-    console.log(babo)
+    // console.log(req.query.result)   // 659ca0554c07c1ffc190aacf (글 id)
+    // console.log(session.user.id)    // 65962e35335561799ee2d911 (작성자 id)
+
 
 
 
     // console.log(JSON.parse(req.query.result).author)
     if (req.method === 'DELETE') {
-        // *******터미널 error창 session 부분 에러 확인******
         if (session) {
-            if (JSON.parse(req.query.result).id === session.user.id) {
-                console.log('일치')
+            const roleBase = await db.collection('users').findOne({ _id: new ObjectId(session.user.id) })
+            if (deleteTarget.id === session.user.id || roleBase.role === "master") {
                 try {
-                    const result = await db.collection('post').deleteOne({ _id: new ObjectId(JSON.parse(req.query.result)._id) })
-                    res.status(200).json('삭제완료')
+                    const result = await db.collection('post').deleteOne({ _id: new ObjectId(JSON.parse(req.query.result)) })
+                    res.status(200).json({sucess:'삭제완료'})
                 } catch (error) {
                     console.log(error);
                 }
             } else {
-                // console.log('작성자가 아닙니다.')
-                return res.status(500).json('작성자가 아닙니다.')
-            }0
+                res.status(500).json({userError: '사용자 정보가 다름'})
+            }
         } else {
-            res.status(500).json('로그인 먼저 부탁')
-        }
+            res.status(500).json({loginError: '로그인 먼저 하셈'})
+        } 
         
-
-        // if (JSON.parse(req.query.result).author === session.user.email) {
-        //     console.log('일치')
-        //     try {
-        //         const result = await db.collection('post').deleteOne({ _id: new ObjectId(JSON.parse(req.query.result)._id)})
-        //         res.status(200).json('삭제완료')
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

@@ -1,12 +1,9 @@
 'use client'
 // import { connectDB } from "@/util/database.js"
 import Link from "next/link"
-import { useState } from "react"
-
+import { signIn, signOut } from 'next-auth/react'
 export default function ListItem({ result }) {
-    // console.log(JSON.stringify(result[idx]._id))
-    // console.log(result[idx])
-    // console.log(JSON.stringify(result))
+
     return (
         <>
             {
@@ -22,6 +19,7 @@ export default function ListItem({ result }) {
                             </Link>
                             <Link className="delete" href=''
                                 onClick={(e) => {
+
                                     // // 간단하게 axios 사용해도 좋을 듯?
                                     // fetch('/api/post/delete', {
                                     //     method: 'DELETE',
@@ -34,13 +32,13 @@ export default function ListItem({ result }) {
                                     //             // 서버가 에러코드 전송시 실행할 코드
                                     //         }
                                     //     })
-                                        // .then((result) => {
-                                        //     // 성공시 실행할 코드
-                                        //     document.querySelectorAll('.list-item')[idx].classList.add('active')
-                                        //     setTimeout( () => {
-                                        //         e.target.parentElement.parentElement.style.display = 'none'
-                                        //     }, 500)
-                                        // })
+                                    // .then((result) => {
+                                    //     // 성공시 실행할 코드
+                                    //     document.querySelectorAll('.list-item')[idx].classList.add('active')
+                                    //     setTimeout( () => {
+                                    //         e.target.parentElement.parentElement.style.display = 'none'
+                                    //     }, 500)
+                                    // })
                                     //     .catch((error) => {
                                     //         // 인터넷 문제로 실패시 실행 할 코드
                                     //         console.log(error);
@@ -67,28 +65,33 @@ export default function ListItem({ result }) {
                                     //     alert('성공')
                                     // })
                                     // .catch(error => console.log(error))
-                                    
-                                    fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`,{
-                                        method: 'DELETE'
-                                    })
-                                    .then((r)=> {
-                                        if(r.status == 200) {
-                                            return r.json();
-                                        } else  {
-                                            alert('에러!')
-                                        }
-                                    })
-                                    .then((re)=>{
-                                        e.target.parentElement.parentElement.classList.add('active')
-                                        setTimeout( () => {
-                                            e.target.parentElement.parentElement.style.display = 'none'
-                                        },500)
-                                    })
-                                    .catch(error => console.log(error))
+                                    const alertComfirm = confirm("정말 삭제하시겠습니까?")
+                                    if (alertComfirm) {
+                                        fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`, {
+                                            method: 'DELETE'
+                                        })
+                                            .then((res) => {
+                                                // [result].js에서 응답 받은 status 값 반환
+                                                return res.json();
+                                            })
+                                            .then((result) => {
+                                                if (result.sucess) {
+                                                    e.target.parentElement.parentElement.classList.add('active')
+                                                    setTimeout(() => {
+                                                        e.target.parentElement.parentElement.style.display = 'none'
+                                                    }, 500)
+                                                } else if (result.loginError) {
+                                                    alert('로그인 먼저 해주세요! 😊')
+                                                    signIn();
+                                                } else if (result.userError) {
+                                                    alert('권한이 없습니다! 😅')
+                                                }
+                                            })
+                                            .catch(error => console.log(error))
+                                    }
                                 }}>
                                 삭제하기
                             </Link>
-                            
                         </div>
                     </div>
                 ))
