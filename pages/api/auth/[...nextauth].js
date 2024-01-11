@@ -75,7 +75,7 @@ export const authOptions = {
         token.user = {};
         token.user.name = user.name
         token.user.email = user.email
-        token.user.role = 'general'
+        // token.user.role = 'general'
       }
       return token
     },
@@ -86,7 +86,7 @@ export const authOptions = {
 
       session.user.id = token.sub;
       session.user.img = token.picture;
-      session.user.role = 'general'
+      // session.user.role = 'general'
       return session;
             
     },
@@ -103,7 +103,7 @@ export const authOptions = {
   },
   // 로그인 custom page
   pages: {
-    signIn: '/signin'
+    signIn: '/signin',
   },
   // jwt 사용자 지정 로그인 방식 끝
 

@@ -21,13 +21,15 @@ a {
     margin: 0 auto;
     padding: 15px 20px;
 }
-
-.details {
+.layout-lg.col {
+    flex-direction: column;
+}
+.content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-
 .list-bg {
     background: rgb(249, 250, 255);
     padding: 10px;
@@ -341,4 +343,7 @@ button {
 .logo img {
     width: 36px;
     height: 36px;
+}
+.comment {
+    margin-top: 40px;
 }
