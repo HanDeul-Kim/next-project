@@ -4,6 +4,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+ul,ol,li {list-style: none;}
 body, div, p, a, span, h1, h2, h3, button{
     font-family: 'Noto Sans KR', sans-serif;
 }
@@ -344,6 +345,6 @@ button {
     width: 36px;
     height: 36px;
 }
-.comment {
+.comment-wrap {
     margin-top: 40px;
 }

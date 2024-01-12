@@ -18,7 +18,8 @@ export default async function handler(req, res) {
                 let insertComment = {
                     content: conveter.comment,
                     parent: new ObjectId(conveter._id),
-                    id: session.user.id
+                    id: session.user.id,
+                    // time: conveter.time
                 }
     
                 let result = await db.collection('comment').insertOne(insertComment);
