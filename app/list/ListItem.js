@@ -53,7 +53,7 @@ export default function ListItem({ result }) {
                                     // fetch(`/api/post/delete?currentId=${result[idx]._id}`, {
                                     //     method: 'DELETE',
 
-                                    // })
+                                    // }) 
                                     // .then((r)=> {
                                     //     if(r.status == 200) {
                                     //         return r.json();

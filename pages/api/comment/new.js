@@ -13,18 +13,21 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         if (session) {
             if (conveter.comment === '') {
-                res.status(500).json({blankError:'빈칸입니다.'})
+                res.status(500).json({blankError: true})
             } else {
                 let insertComment = {
                     content: conveter.comment,
                     parent: new ObjectId(conveter._id),
                     id: session.user.id,
-                    // time: conveter.time
+                    date: conveter.date,
+                    time: conveter.time
                 }
-    
+
                 let result = await db.collection('comment').insertOne(insertComment);
-                res.status(200).json('저장')
+                res.status(200).json({sucess: true})
             }
+        } else {
+            res.status(500).json({loginError: true})
         }
 
     }

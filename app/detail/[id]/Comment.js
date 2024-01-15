@@ -9,25 +9,33 @@ export default function Comment({ _id }) {
         fetchComments();
     }, [])
     const fetchComments = () => {
-        fetch(`/api/comment/list?id=${_id}`)
-        .then(r => r.json())
-        .then((result) => {
-            setShowComments(result);
-        })
-        .catch(error => console.error(error));
+        fetch(`/api/comment/viewComments?id=${_id}`)
+            .then(r => r.json())
+            .then((result) => {
+                setShowComments(result);
+            })
+            .catch(error => console.error(error));
     }
+
+
+
+
+    // 날짜
+    let today = new Date();
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1;  // 월
+    let date = today.getDate();  // 일
+    month = month >= 10 ? month : '0' + month;
+    date = date >= 10 ? date : '0' + date;
+    let currentDate = `${year}.${month}.${date}`
+
+    // 시간
+    let hours = ('0' + today.getHours()).slice(-2);
+    let minutes = ('0' + today.getMinutes()).slice(-2);
+    let currentTime = `${hours}:${minutes}`;
 
     return (
         <div className="comment-wrap">
-            <ul className="comments">
-                {
-                    showComments.map( (el, idx, arr) => {
-                        return (
-                            <li key={idx} className="comment">{showComments[idx].content}</li>
-                        )
-                    })
-                }
-            </ul>
             <div className="input-comment">
                 <input type="text" onChange={(e) => {
                     const inValue = e.target.value;
@@ -39,30 +47,55 @@ export default function Comment({ _id }) {
                         body: JSON.stringify({
                             comment: comment,
                             _id: _id,
-                            // time: "1"
+                            date: currentDate,
+                            time: currentTime
+
                         })
                     })
                         .then((res) => {
                             return res.json()
                         })
+                        // .then((result) => {
+                        //     if (result.blankError) {
+                        //         alert('댓글을 입력해주세요')
+                        //     } else {
+                        //         fetchComments();
+                        //     }
+                        // })
                         .then((result) => {
-                            if (result.blankError) {
-                                alert('댓글을 입력해주세요')
-                            } else {
+                            if (result.sucess) {
                                 fetchComments();
+                            } else if(result.loginError) {
+                                alert('로그인 먼저 해주세요! 😊')
+                            } else if(result.blankError) {
+                                alert('댓글을 입력 해주세요! 😊')
                             }
                         })
                         .catch(error => console.log(error))
                 }}>
-                    댓글전송
+                    댓글 전송
 
                     {/* 작성자 이름
                     작성자 프사 (nav 프로필과 같이) 
                     작성 시간 */}
                     {/* 엔터로 작성 & 작성 후 빈칸 */}
+                    
 
                 </button>
             </div>
+            <ul className="comments">
+                {
+                    showComments.map((el, idx, arr) => {
+                        return (
+                            <li key={idx} className="comment">
+                                {showComments[idx].content}
+                                {showComments[idx].date}
+                                {showComments[idx].time}
+                            </li>
+                        )
+                    })
+                }
+            </ul>
         </div>
     )
 }

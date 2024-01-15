@@ -18,18 +18,60 @@ a {
     display:flex;
     justify-content: center;
     width: 100%;
-    max-width: 1920px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 15px 20px;
 }
 .layout-lg.col {
     flex-direction: column;
 }
+.details {
+    min-height: calc( 100vh - 113.33px);
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.detail-head {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom:8px;
+    border-bottom: 1px solid #D2D4D8;
+}
+.detail-head .list-writer {
+    display:flex;
+    align-items: center;
+    gap:6px;
+}
+.detail-head .list-writer .writer {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.detail-head .list-writer .writer span:first-child {
+    font-size: 12px;
+}
+.detail-head div {
+    font-size: 14px;
+}
+.detail-head div:nth-child(2) {
+    color: gray;
+}
+.detail-head .list-date {
+    display:flex;
+    justify-content: center;
+    gap:6px;
+}
+.detail-head .list-date .date-icon {
+    font-size: 14px;
+}
 .content {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding-top: 36px;
+    padding-bottom: 200px;
 }
 .list-bg {
     background: rgb(249, 250, 255);
@@ -59,7 +101,6 @@ a {
     font-weight: 800;
     margin: 0;
 }
-
 .list-item p {
     color: grey;
     margin: 5px 0px;
@@ -230,10 +271,8 @@ button {
 }
 
 .profile img {
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-
+    width: 80%;
+    max-width:450px;
 }
 .gallery-close {
     position: absolute;
@@ -346,5 +385,15 @@ button {
     height: 36px;
 }
 .comment-wrap {
-    margin-top: 40px;
+    padding-top: 8px;
+    border-top: 1px solid #D2D4D8;
 }
+.comment {
+    margin-bottom: 20px;
+}
+
+.comments {
+}
+.input-comment {
+}
+
