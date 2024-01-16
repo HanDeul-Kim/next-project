@@ -13,7 +13,6 @@ export default async function Detail(props) {
     let session = await getServerSession(authOptions)
     let userInfo = await db.collection('users').findOne({ _id: new ObjectId(result.id) });
 
-    // session이 아닌 최초 글 등록 했을때 유저의 이름, 프로필사진, 시간이여야 함
     return (
         <div className="layout-lg col">
             <div className="details">

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { signIn, signOut } from 'next-auth/react'
 export default function ListItem({ result }) {
 
+    // result === post 전체
     return (
         <>
             {

@@ -5,7 +5,6 @@ import { authOptions } from "../auth/[...nextauth]";
 export default async function handler(req, res) {
 
     let session = await getServerSession(req, res, authOptions);
-    
     let conveter = JSON.parse(req.body);
     let client = await connectDB;
     const db = client.db("next")
@@ -20,7 +19,9 @@ export default async function handler(req, res) {
                     parent: new ObjectId(conveter._id),
                     id: session.user.id,
                     date: conveter.date,
-                    time: conveter.time
+                    time: conveter.time,
+                    img: session.user.image,
+                    name: session.user.name
                 }
 
                 let result = await db.collection('comment').insertOne(insertComment);
