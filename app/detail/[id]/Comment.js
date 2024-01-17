@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 
-export default function Comment({ _id }) {
+export default function Comment({ _id, role }) {
     let [comment, setComment] = useState('');
     let [showComments, setShowComments] = useState([]);
 
@@ -16,9 +16,10 @@ export default function Comment({ _id }) {
             })
             .catch(error => console.error(error));
     }
-
     
 
+    // console.log(_id);
+    // console.log(role)
     // 날짜
     let today = new Date();
     let year = today.getFullYear(); // 년도
@@ -42,7 +43,7 @@ export default function Comment({ _id }) {
                     <input className="resetInput" type="text" onChange={(e) => {
                         const inValue = e.target.value;
                         setComment(inValue);
-                    }} />
+                    }} placeholder="댓글을 남겨 보세요."/>
                     <button type="submit" onClick={(e) => {
                         fetch('/api/comment/new', {
                             method: 'POST',
@@ -50,7 +51,7 @@ export default function Comment({ _id }) {
                                 comment: comment,
                                 _id: _id,
                                 date: currentDate,
-                                time: currentTime
+                                time: currentTime,
                             }),
                         })
                             .then((res) => {
@@ -77,40 +78,64 @@ export default function Comment({ _id }) {
                     }}>
                         댓글 전송
 
-                        {/* 작성자 이름
-                        작성자 프사 (nav 프로필과 같이) 
-                        작성 시간 */}
-                        {/* 엔터로 작성 & 작성 후 빈칸 */}
                         
 
                     </button>
                 </form>
             </div>
-            <div className="comment_count">댓글 16개</div>
-            {/* class명 => 디자인 => 댓글 삭제, 수정, => 관리자 설정 */}
+            <div className="comment_count">댓글 {showComments.length}개</div>
+             {/* 댓글 삭제, 수정, => 관리자 설정 */}
             <ul className="comments">
                 {
                     showComments.map((el, idx, arr) => {
                         return (
-                            <li key={idx} className="comment">
-                                <div className="comment-profile">
-                                    <img src={showComments[idx].img} alt="" />
-                                    <div className="comment-profile-name">
-                                        <div className="test">
-                                            <span>{showComments[idx].name}</span>
-                                            <span>{showComments[idx].date} {showComments[idx].time}</span>
-                                        </div>
-                                        {/* <span>{showComments[idx].name}</span> */}
-                                        <span>[일반 회원]</span>
+                            <li key={idx} className="comment-list">
+                                <div className="comment-head">
+                                    {/* <img src="../ogs" alt="" /> */}
+                                    <div className="comment-user">
+                                        <img src={showComments[idx].img} alt="" />
+                                        <div className="crown"><img src="../crown.png" alt="" /></div>
+                                        <div className="comment-user-info">
+                                            <span>
+                                                {showComments[idx].name}
+                                            </span>
+                                            <span>
+                                                {showComments[idx].role === "master" ? '[관리자]' : '[일반 회원]'}
+                                            </span>
+                                        </div>    
+                                    </div>
+                                    <div className="comment-date">
+                                        <span>
+                                            {showComments[idx].date} {showComments[idx].time}
+                                        </span>
                                     </div>
                                 </div>
+
                                 <div className="comment-content">
                                     <p>{showComments[idx].content}</p>
                                 </div>
                                 
                                 <div className="comment-footer">
-                                    <button className="comment-edit">수정</button>
-                                    <button className="comment-delete">삭제</button>
+                                    <button onClick={ () => {
+                                        fetch(`/api/comment/viewComments?id=${_id}`, {
+                                            method:'GET',
+                                        })
+                                        .then(r => r.json())
+                                        .then((result) => {
+                                            console.log(result)
+                                        })
+                                        .catch(error => console.log(error))
+                                    }}>수정</button>
+                                    <button onClick={ () => {
+                                        fetch(`/api/comment/viewComments?id=${_id}`, {
+                                            method:'DELETE',
+                                        })
+                                        .then(r => r.json())
+                                        .then((result) => {
+                                            console.log(result)
+                                        })
+                                        .catch(error => console.log(error))                                        
+                                    }}>삭제</button>
                                 </div>
                             </li>
                         )

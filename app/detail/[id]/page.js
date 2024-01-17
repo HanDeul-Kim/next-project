@@ -1,17 +1,15 @@
 import { connectDB } from "@/util/database.js"
 import { ObjectId } from "mongodb";
 import Link from "next/link"
-import { getServerSession } from 'next-auth'
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Comment from './Comment'
 export default async function Detail(props) {
 
     let client = await connectDB;
     const db = client.db("next");
     let result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) })
-
-    let session = await getServerSession(authOptions)
+    // console.log(props.params.id) //게시글 id
     let userInfo = await db.collection('users').findOne({ _id: new ObjectId(result.id) });
+    // console.log(userInfo) // 글 작성자
 
     return (
         <div className="layout-lg col">
@@ -44,7 +42,7 @@ export default async function Detail(props) {
                     </div>
                 </div>
 
-                <Comment _id={result._id.toString()} />
+                <Comment _id={result._id.toString()} role={userInfo.role} />
             </div>
         </div>
     )
