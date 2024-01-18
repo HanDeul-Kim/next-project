@@ -68,7 +68,7 @@ export default function ListItem({ result }) {
                                     // .catch(error => console.log(error))
                                     const alertComfirm = confirm("정말 삭제하시겠습니까?")
                                     if (alertComfirm) {
-                                        fetch(`/api/abc/${JSON.stringify(result[idx]._id)}`, {
+                                        fetch(`/api/delete/${JSON.stringify(result[idx]._id)}`, {
                                             method: 'DELETE'
                                         })
                                             .then((res) => {

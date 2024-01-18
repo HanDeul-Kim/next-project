@@ -9,10 +9,10 @@ export default async function handler(req, res) {
     let session = await getServerSession(req, res, authOptions);
     let conveter = JSON.parse(req.body);
 
-    let userInfo = await db.collection('users').findOne({ _id: new ObjectId(session.user.id) });
 
     if (req.method === 'POST') {
         if (session) {
+            let userInfo = await db.collection('users').findOne({ _id: new ObjectId(session.user.id) });
             if (conveter.comment === '') {
                 res.status(500).json({blankError: true})
             } else {

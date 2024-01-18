@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 
-export default function Comment({ _id, role }) {
+export default function Comment({ _id, comments }) {
     let [comment, setComment] = useState('');
     let [showComments, setShowComments] = useState([]);
 
@@ -16,10 +16,13 @@ export default function Comment({ _id, role }) {
             })
             .catch(error => console.error(error));
     }
-    
+    // console.log(JSON.parse(comments))
 
     // console.log(_id);
     // console.log(role)
+    // console.log(JSON.parse(comments))
+    // console.log(comments)
+
     // 날짜
     let today = new Date();
     let year = today.getFullYear(); // 년도
@@ -75,8 +78,10 @@ export default function Comment({ _id, role }) {
                             })
                             .catch(error => console.log(error))
                             document.querySelector('.resetInput').value = '';
+                            setComment('');
+                            
                     }}>
-                        댓글 전송
+                        댓글 작성
 
                         
 
@@ -91,10 +96,16 @@ export default function Comment({ _id, role }) {
                         return (
                             <li key={idx} className="comment-list">
                                 <div className="comment-head">
-                                    {/* <img src="../ogs" alt="" /> */}
                                     <div className="comment-user">
                                         <img src={showComments[idx].img} alt="" />
-                                        <div className="crown"><img src="../crown.png" alt="" /></div>
+                                        <div className="status-img">
+                                            <img src={
+                                                showComments[idx].role === "master" ?
+                                                "../crown.png"
+                                                :
+                                                "../ogsusu5.png"
+                                            } alt="등급별 보이는 이미지." />
+                                            </div>
                                         <div className="comment-user-info">
                                             <span>
                                                 {showComments[idx].name}
@@ -118,23 +129,24 @@ export default function Comment({ _id, role }) {
                                 <div className="comment-footer">
                                     <button onClick={ () => {
                                         fetch(`/api/comment/viewComments?id=${_id}`, {
-                                            method:'GET',
+                                            method:'POST',
                                         })
-                                        .then(r => r.json())
+                                        .then(res => res.json())
                                         .then((result) => {
-                                            console.log(result)
+                                            console.log(result[idx])
                                         })
                                         .catch(error => console.log(error))
                                     }}>수정</button>
                                     <button onClick={ () => {
-                                        fetch(`/api/comment/viewComments?id=${_id}`, {
+                                        
+                                        fetch(`/api/comment/viewComments?deleteId=${JSON.stringify(JSON.parse(comments)[idx])}`, {
                                             method:'DELETE',
                                         })
-                                        .then(r => r.json())
+                                        .then(res => res.json())
                                         .then((result) => {
-                                            console.log(result)
+                                            console.log(result[idx])
                                         })
-                                        .catch(error => console.log(error))                                        
+                                        .catch(error => console.log(error))       
                                     }}>삭제</button>
                                 </div>
                             </li>

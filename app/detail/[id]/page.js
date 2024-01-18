@@ -11,6 +11,11 @@ export default async function Detail(props) {
     let userInfo = await db.collection('users').findOne({ _id: new ObjectId(result.id) });
     // console.log(userInfo) // 글 작성자
 
+
+    // 해당 post의 comment들
+    let comments = await db.collection('comment').find({parent: new ObjectId(props.params.id)}).toArray();
+    
+
     return (
         <div className="layout-lg col">
             <div className="details">
@@ -42,7 +47,7 @@ export default async function Detail(props) {
                     </div>
                 </div>
 
-                <Comment _id={result._id.toString()} role={userInfo.role} />
+                <Comment _id={result._id.toString()} comments={JSON.stringify(comments)}/>
             </div>
         </div>
     )
