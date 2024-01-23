@@ -13,8 +13,7 @@ export default async function Detail(props) {
 
 
     // 해당 post의 comment들
-    let comments = await db.collection('comment').find({parent: new ObjectId(props.params.id)}).toArray();
-    
+    // let comments = await db.collection('comment').find({parent: new ObjectId(props.params.id)}).toArray();
 
     return (
         <div className="layout-lg col">
@@ -44,10 +43,11 @@ export default async function Detail(props) {
                         <h4>상세페이지</h4>
                         <h4>{result.title}</h4>
                         <p>{result.content}</p>
+                        
                     </div>
                 </div>
 
-                <Comment _id={result._id.toString()} comments={JSON.stringify(comments)}/>
+                <Comment _id={result._id.toString()} />
             </div>
         </div>
     )
