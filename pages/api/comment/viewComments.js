@@ -29,7 +29,24 @@ export default async function handler(req, res) {
     } else if (req.method === "POST") {
         console.log('수정')
         res.status(200).json(result)
-    } 
+    } else if (req.method === "DELETE") {
+        if (session) {
+            const deleteTarget = await db.collection('comment').findOne({ id: req.body.id })
+            const roleBase = await db.collection('users').findOne({ _id: new ObjectId(session.user.id) })
+            if (deleteTarget.id === session.user.id || roleBase.role === "master") {
+                try {
+                    await db.collection('comment').deleteOne({ _id: new ObjectId(req.body._id) })
+                    res.status(200).json({ sucess: true })
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                res.status(200).json({ userError: true })
+            }
+        } else {
+            res.status(200).json({ loginError: true })
+        }
+    }
 }
 
 

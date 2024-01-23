@@ -1,13 +1,14 @@
 'use client'
+import axios from "axios";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react"
-
 export default function Comment({ _id, comments }) {
     let [comment, setComment] = useState('');
     let [showComments, setShowComments] = useState([]);
 
     useEffect(() => {
         fetchComments();
-    }, [])
+    }, [showComments])
     const fetchComments = () => {
         fetch(`/api/comment/viewComments?id=${_id}`)
             .then(r => r.json())
@@ -16,12 +17,6 @@ export default function Comment({ _id, comments }) {
             })
             .catch(error => console.error(error));
     }
-    // console.log(JSON.parse(comments))
-
-    // console.log(_id);
-    // console.log(role)
-    // console.log(JSON.parse(comments))
-    // console.log(comments)
 
     // 날짜
     let today = new Date();
@@ -35,18 +30,18 @@ export default function Comment({ _id, comments }) {
     // 시간
     let hours = ('0' + today.getHours()).slice(-2);
     let minutes = ('0' + today.getMinutes()).slice(-2);
-    
+
     let currentTime = `${hours}:${minutes}`;
 
 
     return (
         <div className="comment-wrap">
             <div className="input-comment">
-                <form onSubmit={ (e) => {e.preventDefault()}}>
+                <form onSubmit={(e) => { e.preventDefault() }}>
                     <input className="resetInput" type="text" onChange={(e) => {
                         const inValue = e.target.value;
                         setComment(inValue);
-                    }} placeholder="댓글을 남겨 보세요."/>
+                    }} placeholder="댓글을 남겨 보세요." />
                     <button type="submit" onClick={(e) => {
                         fetch('/api/comment/new', {
                             method: 'POST',
@@ -64,32 +59,33 @@ export default function Comment({ _id, comments }) {
                             //     if (result.blankError) {
                             //         alert('댓글을 입력해주세요')
                             //     } else {
-                                    // fetchComments();
+                            // fetchComments();
                             //     }
                             // })
                             .then((result) => {
                                 if (result.sucess) {
                                     fetchComments();
-                                } else if(result.loginError) {
+                                } else if (result.loginError) {
                                     alert('로그인 먼저 해주세요! 😊')
-                                } else if(result.blankError) {
+                                    signIn()
+                                    
+                                } else if (result.blankError) {
                                     alert('댓글을 입력 해주세요! 😊')
                                 }
                             })
                             .catch(error => console.log(error))
-                            document.querySelector('.resetInput').value = '';
-                            setComment('');
-                            
+                        document.querySelector('.resetInput').value = '';
+                        setComment('');
+
                     }}>
                         댓글 작성
-
-                        
-
                     </button>
+                    
                 </form>
             </div>
+            
             <div className="comment_count">댓글 {showComments.length}개</div>
-             {/* 댓글 삭제, 수정, => 관리자 설정 */}
+            {/* 댓글 삭제, 수정, => 관리자 설정 */}
             <ul className="comments">
                 {
                     showComments.map((el, idx, arr) => {
@@ -101,11 +97,11 @@ export default function Comment({ _id, comments }) {
                                         <div className="status-img">
                                             <img src={
                                                 showComments[idx].role === "master" ?
-                                                "../crown.png"
-                                                :
-                                                "../ogsusu5.png"
+                                                    "../crown.png"
+                                                    :
+                                                    "../ogsusu5.png"
                                             } alt="등급별 보이는 이미지." />
-                                            </div>
+                                        </div>
                                         <div className="comment-user-info">
                                             <span>
                                                 {showComments[idx].name}
@@ -113,7 +109,7 @@ export default function Comment({ _id, comments }) {
                                             <span>
                                                 {showComments[idx].role === "master" ? '[관리자]' : '[일반 회원]'}
                                             </span>
-                                        </div>    
+                                        </div>
                                     </div>
                                     <div className="comment-date">
                                         <span>
@@ -127,26 +123,31 @@ export default function Comment({ _id, comments }) {
                                 </div>
                                 
                                 <div className="comment-footer">
-                                    <button onClick={ () => {
+                                    <button onClick={() => {
                                         fetch(`/api/comment/viewComments?id=${_id}`, {
-                                            method:'POST',
+                                            method: 'POST',
                                         })
-                                        .then(res => res.json())
-                                        .then((result) => {
-                                            console.log(result[idx])
-                                        })
-                                        .catch(error => console.log(error))
+                                            .then(res => res.json())
+                                            .then((result) => {
+                                                console.log(result[idx])
+                                            })
+                                            .catch(error => console.log(error))
                                     }}>수정</button>
-                                    <button onClick={ () => {
-                                        
-                                        fetch(`/api/comment/viewComments?deleteId=${JSON.stringify(JSON.parse(comments)[idx])}`, {
-                                            method:'DELETE',
+                                    <button onClick={() => {
+                                        axios.delete("/api/comment/viewComments", {
+                                            data: showComments[idx]
                                         })
-                                        .then(res => res.json())
-                                        .then((result) => {
-                                            console.log(result[idx])
-                                        })
-                                        .catch(error => console.log(error))       
+                                            .then((res) => {
+                                                const result = res.data;
+                                                if (result.sucess) {
+                                                    alert('삭제 되었습니다.')
+                                                } else if (result.loginError) {
+                                                    alert('로그인 먼저 해주세요! 😊')
+                                                } else if (result.userError) {
+                                                    alert('권한이 없습니다! 😅')
+                                                }
+                                            })
+                                            .catch(error => console.log("에러발생 이유", error));
                                     }}>삭제</button>
                                 </div>
                             </li>
